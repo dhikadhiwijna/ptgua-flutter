@@ -91,128 +91,116 @@ class _PokemonWidgetState extends State<PokemonWidget> {
                   ),
                 ),
                 appBar: AppBar(
+                  elevation: 0,
                   title: Text(_menuIndex == 0 ? "PokéDex" : "My Pokémon"),
-                  backgroundColor: Colors.red,
+                  backgroundColor: _menuIndex == 0 ? Colors.red : Colors.teal,
                 ),
                 body: SafeArea(
                     child: _menuIndex == 0
                         ? pokemonState is PokemonLoadInProgress
                             ? const Center(child: CircularProgressIndicator())
                             : pokemonState is PokemonLoadSuccess
-                                ? Expanded(
-                                    child: GridView.builder(
-                                        gridDelegate:
-                                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                                crossAxisCount: 2,
-                                                childAspectRatio: 1.4),
-                                        itemCount:
-                                            pokemonState.pokemonList.length,
-                                        itemBuilder: (context, index) {
-                                          handleClick() {
-                                            BlocProvider.of<NavCubit>(context)
-                                                .showPokemonDetails(pokemonState
-                                                    .pokemonList[index].id);
-                                            BlocProvider.of<
-                                                        PokemonDetailsCubit>(
-                                                    context)
-                                                .getPokemonDetails(pokemonState
-                                                    .pokemonList[index].id);
-                                          }
+                                ? GridView.builder(
+                                    gridDelegate:
+                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 2,
+                                            childAspectRatio: 1.4),
+                                    itemCount: pokemonState.pokemonList.length,
+                                    itemBuilder: (context, index) {
+                                      handleClick() {
+                                        BlocProvider.of<NavCubit>(context)
+                                            .showPokemonDetails(pokemonState
+                                                .pokemonList[index].id);
+                                        BlocProvider.of<PokemonDetailsCubit>(
+                                                context)
+                                            .getPokemonDetails(pokemonState
+                                                .pokemonList[index].id);
+                                      }
 
-                                          return GestureDetector(
-                                            onTap: () => handleClick(),
-                                            child: Hero(
-                                              tag: pokemonState
-                                                  .pokemonList[index].id,
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 8,
-                                                        horizontal: 12),
-                                                child: Container(
-                                                  decoration: BoxDecoration(
-                                                      color: Colors.redAccent,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              20)),
-                                                  child: Stack(children: [
-                                                    Positioned(
-                                                        top: 20,
-                                                        left: 20,
-                                                        child: Container(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .symmetric(
-                                                                  horizontal:
-                                                                      15,
-                                                                  vertical: 5),
-                                                          decoration: BoxDecoration(
-                                                              color:
-                                                                  Colors.white,
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          15)),
-                                                          child: Text(
+                                      return GestureDetector(
+                                        onTap: () => handleClick(),
+                                        child: Hero(
+                                          tag: pokemonState
+                                              .pokemonList[index].id,
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 8, horizontal: 12),
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                  color: Colors.redAccent,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20)),
+                                              child: Stack(children: [
+                                                Positioned(
+                                                    top: 20,
+                                                    left: 20,
+                                                    child: Container(
+                                                      padding: const EdgeInsets
+                                                              .symmetric(
+                                                          horizontal: 15,
+                                                          vertical: 5),
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.white,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      15)),
+                                                      child: Text(
+                                                        pokemonState
+                                                            .pokemonList[index]
+                                                            .name,
+                                                        style: const TextStyle(
+                                                            fontSize: 18,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    )),
+                                                Positioned(
+                                                  bottom: -30,
+                                                  right: -30,
+                                                  height: 120,
+                                                  width: 120,
+                                                  child: Container(
+                                                    width: 100,
+                                                    height: 100,
+                                                    decoration:
+                                                        const BoxDecoration(
+                                                      image: DecorationImage(
+                                                        image: AssetImage(
+                                                            "assets/pokeball.png"),
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                Positioned(
+                                                  bottom: -10,
+                                                  right: -10,
+                                                  height: 120,
+                                                  width: 120,
+                                                  child: Container(
+                                                    width: 100,
+                                                    height: 100,
+                                                    decoration: BoxDecoration(
+                                                      image: DecorationImage(
+                                                        image: NetworkImage(
                                                             pokemonState
                                                                 .pokemonList[
                                                                     index]
-                                                                .name,
-                                                            style: const TextStyle(
-                                                                fontSize: 18,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold),
-                                                          ),
-                                                        )),
-                                                    Positioned(
-                                                      bottom: -30,
-                                                      right: -30,
-                                                      height: 120,
-                                                      width: 120,
-                                                      child: Container(
-                                                        width: 100,
-                                                        height: 100,
-                                                        decoration:
-                                                            const BoxDecoration(
-                                                          image:
-                                                              DecorationImage(
-                                                            image: AssetImage(
-                                                                "assets/pokeball.png"),
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                        ),
+                                                                .pokemonImage),
+                                                        fit: BoxFit.cover,
                                                       ),
                                                     ),
-                                                    Positioned(
-                                                      bottom: -10,
-                                                      right: -10,
-                                                      height: 120,
-                                                      width: 120,
-                                                      child: Container(
-                                                        width: 100,
-                                                        height: 100,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          image:
-                                                              DecorationImage(
-                                                            image: NetworkImage(
-                                                                pokemonState
-                                                                    .pokemonList[
-                                                                        index]
-                                                                    .pokemonImage),
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ]),
+                                                  ),
                                                 ),
-                                              ),
+                                              ]),
                                             ),
-                                          );
-                                        }),
-                                  )
+                                          ),
+                                        ),
+                                      );
+                                    })
                                 : pokemonState is PokemonLoadFailed
                                     ? Center(
                                         child:
@@ -224,7 +212,8 @@ class _PokemonWidgetState extends State<PokemonWidget> {
                                 ? GridView.builder(
                                     gridDelegate:
                                         const SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 2),
+                                            crossAxisCount: 2,
+                                            childAspectRatio: 1.4),
                                     itemCount:
                                         myPokemonState.pokemonList.length,
                                     itemBuilder: (context, index) {
@@ -248,7 +237,7 @@ class _PokemonWidgetState extends State<PokemonWidget> {
                                                 vertical: 8, horizontal: 12),
                                             child: Container(
                                               decoration: BoxDecoration(
-                                                  color: Colors.redAccent,
+                                                  color: Colors.green,
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           20)),
@@ -366,7 +355,8 @@ class _PokemonWidgetState extends State<PokemonWidget> {
                         backgroundColor: Colors.black,
                         color: Colors.white,
                         activeColor: Colors.white,
-                        tabBackgroundColor: Colors.red,
+                        tabBackgroundColor:
+                            _menuIndex == 0 ? Colors.red : Colors.cyan,
                         padding: const EdgeInsets.all(12),
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         gap: 10,

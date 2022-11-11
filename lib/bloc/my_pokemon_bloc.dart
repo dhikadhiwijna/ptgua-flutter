@@ -1,5 +1,4 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:localstorage/localstorage.dart';
 import 'package:ptgua_flutter/data/model/pokemon_details_model.dart';
 
 class MyPokemonBloc extends Bloc<AddPokemonRequest, ListPokemonState> {
@@ -8,11 +7,6 @@ class MyPokemonBloc extends Bloc<AddPokemonRequest, ListPokemonState> {
   @override
   Stream<ListPokemonState> mapEventToState(AddPokemonRequest event) async* {
     try {
-      // final LocalStorage storage = LocalStorage('catched_pokemon');
-      // final json = event.pokemonDetails.map((item) {
-      //   return item.toJSONEncodable();
-      // }).toList();
-      // storage.setItem('todos', json);
       yield AddPokemonSuccess(
         pokemonList: event.pokemonDetails,
       );

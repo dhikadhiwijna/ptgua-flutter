@@ -19,7 +19,7 @@ class PokemonDetailsCubit extends Cubit<PokemonDetails> {
       final pokemonInfo = response[0] as PokemonInfoResponse;
       final speciesInfo = response[1] as PokemonSpeciesInfoResponse;
 
-      print(pokemonInfo.name);
+      // print(pokemonInfo.name);
 
       emit(PokemonDetails(
           id: pokemonInfo.id,
@@ -30,8 +30,8 @@ class PokemonDetailsCubit extends Cubit<PokemonDetails> {
           weight: pokemonInfo.weight,
           description: speciesInfo.description));
     } catch (e) {
-      print(pokemonId);
-      throw Error();
+      // print(pokemonId);
+      // throw Error();
     }
   }
 

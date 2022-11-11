@@ -28,7 +28,7 @@ class PokemonRepository {
       final json = await jsonDecode(response.body);
       return PokemonInfoResponse.fromJson(json);
     } catch (e) {
-      print(e);
+      // print(e);
       throw Error();
     }
   }
@@ -42,7 +42,7 @@ class PokemonRepository {
       final json = await jsonDecode(response.body);
       return PokemonSpeciesInfoResponse.fromJson(json);
     } catch (e) {
-      print(e);
+      // print(e);
       throw Error();
     }
   }
