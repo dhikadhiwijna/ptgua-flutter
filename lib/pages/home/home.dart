@@ -10,6 +10,7 @@ import 'package:ptgua_flutter/bloc/nav_cubit.dart';
 import 'package:ptgua_flutter/bloc/pokemon_bloc.dart';
 import 'package:ptgua_flutter/bloc/pokemon_details_cubit.dart';
 import 'package:ptgua_flutter/data/model/pokemon_details_model.dart';
+import 'package:ptgua_flutter/pages/home/home_widget/home_no_data.dart';
 import 'package:ptgua_flutter/utils/capitalize.dart';
 
 class PokemonWidget extends StatefulWidget {
@@ -328,40 +329,8 @@ class _PokemonWidgetState extends State<PokemonWidget> {
                                         ),
                                       );
                                     })
-                                : Center(
-                                    child: Container(
-                                        alignment: Alignment.center,
-                                        height: 300,
-                                        // color: Colors.red,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Image.asset(
-                                              "assets/pokeball.png",
-                                              width: 200,
-                                            ),
-                                            const Text(
-                                                "You don't have any pokemon. Go Catch one!")
-                                          ],
-                                        )))
-                            : Center(
-                                child: Container(
-                                    alignment: Alignment.center,
-                                    height: 300,
-                                    // color: Colors.red,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Image.asset(
-                                          "assets/pokeball.png",
-                                          width: 200,
-                                        ),
-                                        const Text(
-                                            "You don't have any pokemon. Get your first Pokemon!")
-                                      ],
-                                    )))),
+                                : homeNoData()
+                            : homeNoDataFirst()),
                 bottomNavigationBar: Container(
                   height: 90,
                   color: Colors.black,
