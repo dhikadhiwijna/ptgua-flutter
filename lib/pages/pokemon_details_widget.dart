@@ -90,6 +90,7 @@ class PokemonDetailsWidget extends StatelessWidget {
                                                   pokemonDetails: [details]));
                                           final pokemonName = details.name;
                                           final snackBar = SnackBar(
+                                            backgroundColor: Colors.teal,
                                             duration:
                                                 const Duration(seconds: 1),
                                             content: Text(
@@ -116,6 +117,7 @@ class PokemonDetailsWidget extends StatelessWidget {
                                     addPokemonToList() async {
                                       final pokemonName = details.name;
                                       final snackBar = SnackBar(
+                                        backgroundColor: Colors.teal,
                                         duration: const Duration(seconds: 1),
                                         content:
                                             Text("You catch $pokemonName!"),
@@ -134,6 +136,7 @@ class PokemonDetailsWidget extends StatelessWidget {
                                           onPressed: () {
                                             final pokemonName = details.name;
                                             final snackBar = SnackBar(
+                                              backgroundColor: Colors.red,
                                               duration:
                                                   const Duration(seconds: 1),
                                               content: Text(

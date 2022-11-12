@@ -2,6 +2,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:ptgua_flutter/bloc/my_pokemon_bloc.dart';
@@ -9,6 +10,7 @@ import 'package:ptgua_flutter/bloc/nav_cubit.dart';
 import 'package:ptgua_flutter/bloc/pokemon_bloc.dart';
 import 'package:ptgua_flutter/bloc/pokemon_details_cubit.dart';
 import 'package:ptgua_flutter/data/model/pokemon_details_model.dart';
+import 'package:ptgua_flutter/utils/capitalize.dart';
 
 class PokemonWidget extends StatefulWidget {
   const PokemonWidget({Key key}) : super(key: key);
@@ -60,8 +62,10 @@ class _PokemonWidgetState extends State<PokemonWidget> {
                                 .toList();
                             final pokemonList = myPokemonState.pokemonList;
                             if (catchedPokemon.isNotEmpty) {
-                              final pokemonName = pokemonDetails.name;
+                              final pokemonName =
+                                  pokemonDetails.name.toCapitalized();
                               final snackBar = SnackBar(
+                                backgroundColor: Colors.red,
                                 duration: const Duration(seconds: 1),
                                 content: Text(
                                     "Oh no! You catch $pokemonName, You already have it!"),
@@ -76,8 +80,10 @@ class _PokemonWidgetState extends State<PokemonWidget> {
                                       pokemonDetails: pokemonList));
                             }
                           }
-                          final pokemonName = pokemonDetails.name;
+                          final pokemonName =
+                              pokemonDetails.name.toCapitalized();
                           final snackBar = SnackBar(
+                            backgroundColor: Colors.teal,
                             duration: const Duration(seconds: 1),
                             content: Text("Yay! You Catch $pokemonName!"),
                           );
@@ -85,15 +91,24 @@ class _PokemonWidgetState extends State<PokemonWidget> {
                         }
                       });
                     },
+                    backgroundColor: Colors.black,
+                    icon: const Icon(Icons.add),
                     label: pokemonDetails == null
                         ? const Text("Catch Random Pokemon")
-                        : const Icon(Icons.add),
+                        : const Text("Add"),
                   ),
                 ),
                 appBar: AppBar(
                   elevation: 0,
-                  title: Text(_menuIndex == 0 ? "PokéDex" : "My Pokémon"),
-                  backgroundColor: _menuIndex == 0 ? Colors.red : Colors.teal,
+                  systemOverlayStyle: const SystemUiOverlayStyle(
+                    statusBarIconBrightness: Brightness.dark,
+                    statusBarBrightness: Brightness.light,
+                  ),
+                  title: Text(
+                    _menuIndex == 0 ? "PokéDex" : "My Pokémon",
+                    style: const TextStyle(color: Colors.black),
+                  ),
+                  backgroundColor: Colors.transparent,
                 ),
                 body: SafeArea(
                     child: _menuIndex == 0
@@ -149,7 +164,8 @@ class _PokemonWidgetState extends State<PokemonWidget> {
                                                       child: Text(
                                                         pokemonState
                                                             .pokemonList[index]
-                                                            .name,
+                                                            .name
+                                                            .toCapitalized(),
                                                         style: const TextStyle(
                                                             fontSize: 18,
                                                             fontWeight:
@@ -259,7 +275,8 @@ class _PokemonWidgetState extends State<PokemonWidget> {
                                                       child: Text(
                                                         myPokemonState
                                                             .pokemonList[index]
-                                                            .name,
+                                                            .name
+                                                            .toCapitalized(),
                                                         style: const TextStyle(
                                                             fontSize: 18,
                                                             fontWeight:

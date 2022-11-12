@@ -13,7 +13,7 @@ class PokemonRepository {
       "limit": 100.toString(),
       "offset": (pageIndex * 100).toString()
     };
-    final uri = Uri.http(baseUrl, "/api/v2/pokemon", queryParams);
+    final uri = Uri.https(baseUrl, "/api/v2/pokemon", queryParams);
     final response = await client.get(uri);
     final json = await jsonDecode(response.body);
 
